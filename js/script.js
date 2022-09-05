@@ -18,29 +18,33 @@ const handlerForm = (e) => {
   }
 };
 
-const submitForm = () => {
-  // console.log(todolist);
-  document.getElementById("do").value = "";
-  const template = todolist.map((arr, index) => {
+const template = (arr) => {
+  const temp = arr.map((val, index) => {
     return `
     <li class="list-group-item">
           <div class="row">
-            <div class="col-auto me-auto">${arr}</div>
+            <div class="col-auto me-auto">${val}</div>
             <div class="col-auto">
               <button type="button" class="btn btn-outline-success btn-sm">
                 Done
               </button>
-              <button id="${index}" onclick="editData(event)" value="${arr}" type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+              <button id="${index}" onclick="editData(event)" value="${val}" type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                 Edit
               </button>
-              <button id="${index}" onclick="removeData(event)" value="${arr}" type="button" class="btn btn-outline-danger btn-sm">
+              <button id="${index}" onclick="removeData(event)" value="${val}" type="button" class="btn btn-outline-danger btn-sm">
                 Delete
               </button>
             </div>
           </div>
         </li>`;
   });
-  resultList.innerHTML = template;
+  resultList.innerHTML = temp;
+};
+
+const submitForm = () => {
+  // console.log(todolist);
+  document.getElementById("do").value = "";
+  template(todolist);
 };
 
 const editData = (e) => {
@@ -50,26 +54,7 @@ const editData = (e) => {
 };
 
 const saveEdit = () => {
-  const template = todolist.map((arr, index) => {
-    return `
-    <li class="list-group-item">
-          <div class="row">
-            <div class="col-auto me-auto">${arr}</div>
-            <div class="col-auto">
-              <button type="button" class="btn btn-outline-success btn-sm">
-                Done
-              </button>
-              <button id="${index}" onclick="editData(event)" value="${arr}" type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                Edit
-              </button>
-              <button id="${index}" onclick="removeData(event)" value="${arr}" type="button" class="btn btn-outline-danger btn-sm">
-                Delete
-              </button>
-            </div>
-          </div>
-        </li>`;
-  });
-  resultList.innerHTML = template;
+  template(todolist);
   // console.log(todolist);
 };
 
@@ -81,26 +66,7 @@ const removeData = (e) => {
   if (confirm(`Confirm Delete ${valRemove}`) == true) {
     todolist.splice(key, 1);
   }
-  const template = todolist.map((arr, index) => {
-    return `
-    <li class="list-group-item">
-          <div class="row">
-            <div class="col-auto me-auto">${arr}</div>
-            <div class="col-auto">
-              <button type="button" class="btn btn-outline-success btn-sm">
-                Done
-              </button>
-              <button id="${index}" onclick="editData(event)" value="${arr}" type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                Edit
-              </button>
-              <button id="${index}" onclick="removeData(event)" value="${arr}" type="button" class="btn btn-outline-danger btn-sm">
-                Delete
-              </button>
-            </div>
-          </div>
-        </li>`;
-  });
-  resultList.innerHTML = template;
+  template(todolist);
 };
 
 const finishedData = (index) => {};
