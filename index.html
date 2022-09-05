@@ -41,10 +41,20 @@
 
     <div class="container-fluid">
       <div class="card border-success mb-3" style="max-width: 18rem">
-        <div class="card-header">Finished</div>
+        <div class="row">
+          <div class="col-auto me-auto">
+            <p class="text-success h6">Finished</p>
+          </div>
+          <p
+            class="col-auto text-success"
+            onclick="clearList()"
+            style="cursor: pointer"
+          >
+            Clear List
+          </p>
+        </div>
         <div class="card-body text-success">
-          <h5 class="card-title">Finished List</h5>
-          <p class="card-text">-</p>
+          <ul id="done-list" class="list-group list-group-flush"></ul>
         </div>
       </div>
     </div>

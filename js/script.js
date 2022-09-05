@@ -1,6 +1,7 @@
 const resultList = document.getElementById("result");
+const doneList = document.getElementById("done-list");
 let todolist = [];
-let doneList = [];
+let finishedList = [];
 let key;
 
 const handlerForm = (e) => {
@@ -18,14 +19,14 @@ const handlerForm = (e) => {
   }
 };
 
-const template = (arr) => {
+const listTemplate = (arr) => {
   const temp = arr.map((val, index) => {
     return `
     <li class="list-group-item">
           <div class="row">
             <div class="col-auto me-auto">${val}</div>
             <div class="col-auto">
-              <button type="button" class="btn btn-outline-success btn-sm">
+              <button id="${index}" value="${val}" type="button" onclick="finishedData(event)" class="btn btn-outline-success btn-sm">
                 Done
               </button>
               <button id="${index}" onclick="editData(event)" value="${val}" type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
@@ -41,10 +42,17 @@ const template = (arr) => {
   resultList.innerHTML = temp;
 };
 
+const doneTemplate = (arr) => {
+  const temp = arr.map((val, index) => {
+    return `<li class="list-group-item">${index + 1}. ${val}</li>`;
+  });
+  doneList.innerHTML = temp;
+};
+
 const submitForm = () => {
   // console.log(todolist);
   document.getElementById("do").value = "";
-  template(todolist);
+  listTemplate(todolist);
 };
 
 const editData = (e) => {
@@ -54,7 +62,7 @@ const editData = (e) => {
 };
 
 const saveEdit = () => {
-  template(todolist);
+  listTemplate(todolist);
   // console.log(todolist);
 };
 
@@ -66,7 +74,21 @@ const removeData = (e) => {
   if (confirm(`Confirm Delete ${valRemove}`) == true) {
     todolist.splice(key, 1);
   }
-  template(todolist);
+  listTemplate(todolist);
 };
 
-const finishedData = (index) => {};
+const finishedData = (e) => {
+  finishedList.push(e.target.value);
+  doneTemplate(finishedList);
+  todolist.splice(e.target.id, 1);
+  listTemplate(todolist);
+  // console.log(e.target.value, e.target.id);
+  // console.log(finishedList);
+};
+
+const clearList = () => {
+  for (let i = 0; i < finishedList.length; i++) {
+    finishedList.splice(finishedList[i], finishedList.length);
+  }
+  doneTemplate(finishedList);
+};
