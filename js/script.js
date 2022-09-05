@@ -1,5 +1,6 @@
 const resultList = document.getElementById("result");
 let todolist = [];
+let doneList = [];
 let key;
 
 const handlerForm = (e) => {
@@ -10,7 +11,6 @@ const handlerForm = (e) => {
 
     case "edit":
       todolist[key] = e.target.value;
-      // console.log(e.target.value, key);
       break;
 
     default:
