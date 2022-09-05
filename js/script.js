@@ -13,21 +13,28 @@ submit.addEventListener("click", (e) => {
   console.log(todolist);
   const template = todolist.map((arr, index) => {
     return `
-    <div class="alert alert-dark" role="alert">
-        <div class="row">
-          <div class="col-auto me-auto">
-            <p class="h6">${arr}</p>
+    <li class="list-group-item">
+          <div class="row">
+            <div class="col-auto me-auto">${arr}</div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-outline-success btn-sm">
+                Done
+              </button>
+              <button type="button" class="btn btn-outline-dark btn-sm">
+                Edit
+              </button>
+              <button type="button" class="btn btn-outline-danger btn-sm">
+                Delete
+              </button>
+            </div>
           </div>
-          <div class="col-auto">
-            <button value"${index}" type="button" class="btn btn-warning btn-sm">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button value="${index}" type="button" class="btn btn-danger btn-sm">
-              <i class="fa-regular fa-trash-can"></i>
-            </button>
-          </div>
-        </div>
-      </div>`;
+        </li>`;
   });
   resultList.innerHTML = template;
 });
+
+const editData = (value) => {};
+
+const removeData = (index) => {};
+
+const finishedData = (index) => {};
